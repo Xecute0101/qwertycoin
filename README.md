@@ -71,7 +71,7 @@ git clone --recurse-submodules https://github.com/qwertycoin-org/qwertycoin
 cd ./qwertycoin
 mkdir ./build
 cd ./build
-cmake -DBUILD_ALL:BOOL=TRUE ..
+cmake -DBUILD_WITH_TOOLS:BOOL=TRUE ..
 cmake --build . --config Release
 ```
 - If all went well, it will complete successfully, and you will find all your binaries in the `./build/src` directory.
@@ -93,7 +93,7 @@ git clone https://github.com/qwertycoin-org/qwertycoin
 cd qwertycoin
 md build
 cd build
-cmake -G "Visual Studio 15 2017 Win64" -DBUILD_ALL:BOOL=TRUE ..
+cmake -G "Visual Studio 16 2019" -A x64 -DBUILD_WITH_TOOLS:BOOL=TRUE ..
 cmake --build . --config Release
 ```
 - If all went well, it will complete successfully, and you will find all your binaries in the `.\build\src\Release` directory;
@@ -115,7 +115,7 @@ git clone https://github.com/qwertycoin-org/qwertycoin
 cd ./qwertycoin
 mkdir ./build
 cd ./build
-cmake -DBUILD_ALL:BOOL=TRUE ..
+cmake -DBUILD_WITH_TOOLS:BOOL=TRUE ..
 cmake --build . --config Release
 ```
 - If all went well, it will complete successfully, and you will find all your binaries in the `./build/src` directory.

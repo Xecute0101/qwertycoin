@@ -798,6 +798,20 @@ struct F_COMMAND_RPC_GET_BLOCKS_LIST
     };
 };
 
+struct COMMAND_RPC_GET_ALT_BLOCKS_LIST {
+  typedef EMPTY_STRUCT request;
+
+  struct response {
+    std::vector<f_block_short_response> alt_blocks;
+    std::string status;
+
+    void serialize(ISerializer &s) {
+      KV_MEMBER(alt_blocks)
+      KV_MEMBER(status)
+    }
+  };
+};
+
 struct F_COMMAND_RPC_GET_BLOCK_DETAILS
 {
     struct request
@@ -1500,6 +1514,97 @@ struct K_COMMAND_RPC_CHECK_RESERVE_PROOF
         bool good;
         uint64_t total;
         uint64_t spent;
+    };
+};
+
+struct BLOCK_STATS_ENTRY {
+    void serialize(ISerializer &s)
+    {
+        KV_MEMBER(height);
+        KV_MEMBER(alreadyGeneratedCoins);
+        KV_MEMBER(transactionsCount);
+        KV_MEMBER(blockSize);
+        KV_MEMBER(difficulty);
+        KV_MEMBER(reward);
+        KV_MEMBER(timestamp);
+        KV_MEMBER(minFee);
+    }
+
+    uint32_t height;
+    uint64_t alreadyGeneratedCoins;
+    uint64_t transactionsCount;
+    uint64_t blockSize;
+    uint64_t difficulty;
+    uint64_t reward;
+    uint64_t timestamp;
+    uint64_t minFee;
+};
+
+struct COMMAND_RPC_GET_STATS_BY_HEIGHTS {
+    struct request {
+        void serialize(ISerializer &s) { KV_MEMBER(heights); }
+
+        std::vector<uint32_t> heights;
+    };
+
+    struct response {
+        void serialize(ISerializer &s)
+        {
+            KV_MEMBER(stats);
+            KV_MEMBER(duration);
+            KV_MEMBER(status);
+        }
+
+        std::vector<BLOCK_STATS_ENTRY> stats;
+        double duration;
+        std::string status;
+    };
+};
+
+struct COMMAND_RPC_GET_STATS_BY_HEIGHTS_RANGE {
+    struct request {
+        void serialize(ISerializer &s)
+        {
+            KV_MEMBER(startHeight);
+            KV_MEMBER(endHeight);
+        }
+
+        uint32_t startHeight;
+        uint32_t endHeight;
+    };
+
+    struct response {
+        void serialize(ISerializer &s)
+        {
+            KV_MEMBER(stats);
+            KV_MEMBER(duration);
+            KV_MEMBER(status);
+        }
+
+        std::vector<BLOCK_STATS_ENTRY> stats;
+        double duration;
+        std::string status;
+    };
+};
+
+struct COMMAND_RPC_RESOLVE_OPEN_ALIAS {
+    struct request {
+        void serialize(ISerializer &s)
+        {
+            KV_MEMBER(url);
+        }
+
+        std::string url;
+    };
+
+    struct response {
+        void serialize(ISerializer &s)
+        {
+            KV_MEMBER(address);
+            KV_MEMBER(status);
+        }
+        std::string address;
+        std::string status;
     };
 };
 

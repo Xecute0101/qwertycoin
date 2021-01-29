@@ -195,6 +195,9 @@ private:
     bool f_on_blocks_list_json(
         const F_COMMAND_RPC_GET_BLOCKS_LIST::request &req,
         F_COMMAND_RPC_GET_BLOCKS_LIST::response &res);
+    bool onAltBlocksListJson(
+        const COMMAND_RPC_GET_ALT_BLOCKS_LIST::request& req,
+        COMMAND_RPC_GET_ALT_BLOCKS_LIST::response& res);
     bool f_on_block_json(
         const F_COMMAND_RPC_GET_BLOCK_DETAILS::request &req,
         F_COMMAND_RPC_GET_BLOCK_DETAILS::response &res);
@@ -237,6 +240,16 @@ private:
         COMMAND_RPC_GET_DIFFICULTY_STAT::response &res);
 
     bool f_getMixin(const Transaction &transaction, uint64_t &mixin);
+
+    bool onGetStatsByHeights(
+        const COMMAND_RPC_GET_STATS_BY_HEIGHTS::request &req,
+        COMMAND_RPC_GET_STATS_BY_HEIGHTS::response &res);
+    bool onGetStatsByHeightsRange(
+        const COMMAND_RPC_GET_STATS_BY_HEIGHTS_RANGE::request &req,
+        COMMAND_RPC_GET_STATS_BY_HEIGHTS_RANGE::response &res);
+    bool onResolveOpenAlias(
+        const COMMAND_RPC_RESOLVE_OPEN_ALIAS::request &req,
+        COMMAND_RPC_RESOLVE_OPEN_ALIAS::response &res);
 
 private:
     static std::unordered_map<std::string, RpcHandler<HandlerFunction>> s_handlers;

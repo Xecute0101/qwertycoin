@@ -239,6 +239,14 @@ public:
     bool get_alternative_blocks(std::list<Block> &blocks);
     size_t get_alternative_blocks_count();
 
+    virtual bool getBlockEntry(uint32_t height,
+                               uint64_t &blockCumulativeSize,
+                               difficulty_type &difficulty,
+                               uint64_t &alreadyGeneratedCoins,
+                               uint64_t &reward,
+                               uint64_t &transactionsCount,
+                               uint64_t &timestamp) override;
+
     void set_cryptonote_protocol(i_cryptonote_protocol *pprotocol);
     void set_checkpoints(Checkpoints &&chk_pts);
 

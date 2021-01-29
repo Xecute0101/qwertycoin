@@ -175,6 +175,23 @@ size_t core::get_alternative_blocks_count()
     return m_blockchain.getAlternativeBlocksCount();
 }
 
+bool core::getBlockEntry(uint32_t height,
+                         uint64_t &blockCumulativeSize,
+                         difficulty_type &difficulty,
+                         uint64_t &alreadyGeneratedCoins,
+                         uint64_t &reward,
+                         uint64_t &transactionsCount,
+                         uint64_t &timestamp)
+{
+    return m_blockchain.getBlockEntry(static_cast<size_t>(height),
+                                      blockCumulativeSize,
+                                      difficulty,
+                                      alreadyGeneratedCoins,
+                                      reward,
+                                      transactionsCount,
+                                      timestamp);
+}
+
 std::time_t core::getStartTime() const
 {
     return start_time;
